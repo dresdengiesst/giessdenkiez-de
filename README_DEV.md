@@ -81,7 +81,7 @@
 - Change directory to `giessdenkiez-de-postgres-api/supabase` to start the Supabase Edge functions
   - `cp .env.sample .env` and change the variables:
     - `PUMPS_URL=<url_to_your_pumps_file>` set value to the URL of your pumps file
-  - Run `supabase functions serve --env-file supabase/.env` in `giessdenkiez-de-postgres-api` directory
+  - Run `npx supabase functions serve --env-file supabase/.env` in `giessdenkiez-de-postgres-api` directory
 - Setup the Frontend:
   - Change directory to `giessdenkiez-de` repository
   - `nvm install && nvm use`
@@ -114,7 +114,7 @@
     - The `geom` column must be in the format: `SRID=4326;POINT(13.44828414775829 52.44315190724164)`
     - Only proceed after verifying that you have succesfully imported all trees into the database table.
   - 🚨 **Attention, important manual step:**
-    - In `giessdenkiez-de-postgres-api/supabase/functions/gdk_stats/index.ts`, change the hardcoded values `MOST_FREQUENT_TREE_SPECIES` and `TREE_COUNT` to fit your city trees.
+    - In `giessdenkiez-de-postgres-api/supabase/functions/gdk_stats/index.ts`, change the hardcoded values `MOST_FREQUENT_TREE_SPECIES`, `TOTAL_TREE_SPECIES_COUNT` and `TREE_COUNT` to fit your city trees.
 - In the `giessdenkiez-de-dwd-harvester` directory, do the following:
   - 🚨 **Attention, important manual step:** Obtain a [Shapefile](https://desktop.arcgis.com/en/arcmap/latest/manage-data/shapefiles/what-is-a-shapefile.htm) of your city which outlines the geographical city borders.
   - One source for obtaining the shapefile could be the [Geofabrik Portal](https://www.geofabrik.de/de/data/shapefiles.html). The Shapefile `your_city.shp` comes with a project file `your_project.proj`. Save both files in the `giessdenkiez-de-dwd-harvester/harvester/assets` directory.
@@ -138,7 +138,7 @@
   - Change values in the `.env`:
     - `VITE_MAP_CENTER_LNG=13.388836926491992` change the value to the longitude of the center of your city
     - `VITE_MAP_CENTER_LAT=52.494590307846366` change the value to the latitude of the center of your city
-    - `VITE_MAP_BOUNDING_BOX=13.0824446341071,52.3281202651866,13.7682544186827,52.681600197973` change the value to the top left and bottom right corner coordinates of your city
+    - `VITE_MAP_BOUNDING_BOX=13.0824446341071,52.3281202651866,13.7682544186827,52.681600197973` change the value to the top left and bottom right corner coordinates of your city (e.g.: SELECT min(lat) as minlat, max(lat) as maxlat, min(lng) as minlong, max(lng) maxlong FROM public.trees;)
     - `VITE_MAPBOX_TREES_TILESET_URL` change value to point to the newly created Mapbox layer containing the trees of your city
   - Reload the `.env` file: `direnv allow`
   - Restart the App: `npm run dev`
