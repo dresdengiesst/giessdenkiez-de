@@ -5,7 +5,6 @@ import { CloseIcon } from "../icons/close-icon";
 import { MapIcon } from "../icons/map-icon";
 import { WateringIcon } from "../icons/watering-icon";
 import { TreeSplashIcon } from "../icons/tree-splash-icon";
-import { HiThereIcon } from "../icons/hi-there-icon";
 import { LanguageToggle } from "../router/languageToggle";
 import { useI18nStore } from "../../i18n/i18n-store";
 import Markdown from "react-markdown";
@@ -85,8 +84,8 @@ export const Splash: React.FC = () => {
 					<div className="flex flex-col lg:flex-row justify-between w-full">
 						<div className="flex flex-row justify-between">
 							<div className="text-3xl font-bold flex-row flex gap-1 lg:translate-y-5">
-								<span>Gieß den</span>{" "}
-								<span className="text-gdk-neon-green"> Kiez</span>
+								<span>Dresden </span>{" "}
+								<span className="text-gdk-neon-green"> Giesst</span>
 								<div className="-translate-y-3">
 									<SplashTreeIcon />
 								</div>
@@ -158,12 +157,6 @@ export const Splash: React.FC = () => {
 						title={i18n.splash.adoptTitle}
 						content={i18n.splash.adoptContent}
 						icon={<TreeSplashIcon className="w-6 h-6 2xl:w-8 2xl:h-8" />}
-					/>
-
-					<SectionHeading
-						title={i18n.splash.networkTitle}
-						content={i18n.splash.networkContent}
-						icon={<HiThereIcon className="w-6 h-6 2xl:w-8 2xl:h-8" />}
 					/>
 				</div>
 			</div>

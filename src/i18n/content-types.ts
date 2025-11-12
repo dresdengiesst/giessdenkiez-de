@@ -1,17 +1,14 @@
 type TreeTypeId =
+    | "AHORN"
 	| "LINDE"
-	| "AHORN"
 	| "EICHE"
-	| "KASTANIE"
+    | "PRUNUS"
+    | "ESCHE"
 	| "ROSSKASTANIE"
-	| "PLATANE"
-	| "ESCHE"
 	| "BIRKE"
+    | "HAINBUCHE"
 	| "ROBINIE"
-	| "ULME"
-	| "HASEL"
-	| "HAINBUCHE"
-	| "PAPPEL";
+	| "PLATANE";
 
 interface TreeTypeInfo {
 	id: TreeTypeId;
@@ -130,7 +127,6 @@ interface QuestionAnswerHead {
 	press: string;
 	communityTitle: string;
 	communityAnswer: string;
-	slackButton: string;
 	feedback: string;
 }
 
@@ -249,7 +245,6 @@ interface TreeDetail {
 
 interface Filter {
 	title: string;
-	publicPumps: string;
 	myAdoptedTrees: string;
 	allAdoptedTrees: string;
 	lastWateredTrees: string;
@@ -264,16 +259,6 @@ interface Common {
 	defaultErrorMessage: string;
 }
 
-interface Pumps {
-	title: string;
-	status: string;
-	lastCheck: string;
-	update: string;
-	working: string;
-	defect: string;
-	unknown: string;
-}
-
 interface Splash {
 	headline: string;
 	subheadline: string;
@@ -286,8 +271,6 @@ interface Splash {
 	waterContent: string;
 	adoptTitle: string;
 	adoptContent: string;
-	networkTitle: string;
-	networkContent: string;
 	questionHeadline: string;
 	questionSubheadline: string;
 	discoverMoreTitle: string;
@@ -335,7 +318,6 @@ interface Stats {
 	title: string;
 	subtitle: string;
 	streetTrees: string;
-	publicPumps: string;
 	activeUsers: string;
 	backToFront: string;
 	wateringsStat: Stat;
@@ -384,7 +366,6 @@ export interface Content {
 	info: Info;
 	treeDetail: TreeDetail;
 	filter: Filter;
-	pumps: Pumps;
 	splash: Splash;
 	loading: Loading;
 	stats: Stats;

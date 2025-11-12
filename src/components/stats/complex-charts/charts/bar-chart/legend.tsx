@@ -26,19 +26,19 @@ export const Legend: React.FC<LegendProps> = ({
 							{i18n.stats.wateringBehaviorStat.watered}
 						</div>
 						<div className="text-gdk-dark-blue opacity-40">
-							{Math.round(
-								weatherData.filter((d) => d.month === hoveredMonth.month)[0]
-									.totalRainfallLiters,
-							)}
+							{(() => {
+								const matchedWeather = weatherData.find((d) => d.month === hoveredMonth.month);
+								return matchedWeather ? Math.round(matchedWeather.totalRainfallLiters) : 0;
+							})()}
 							{" mm "}
 							{i18n.stats.wateringBehaviorStat.rain}
 						</div>
 						<div className="text-gdk-orange opacity-80">
 							Ø{" "}
-							{Math.round(
-								weatherData.filter((d) => d.month === hoveredMonth.month)[0]
-									.averageTemperatureCelsius,
-							)}
+							{(() => {
+								const matchedWeather = weatherData.find((d) => d.month === hoveredMonth.month);
+								return matchedWeather ? Math.round(matchedWeather.averageTemperatureCelsius) : 0;
+							})()}
 							{" °C"}
 						</div>
 					</div>

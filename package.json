@@ -4,12 +4,12 @@
 	"version": "3.0.0-beta.0",
 	"type": "module",
 	"scripts": {
-		"dev": "vite",
+		"dev": "vite --host 0.0.0.0",
 		"build": "tsc && vite build",
 		"lint": "ESLINT_USE_FLAT_CONFIG=true eslint \"src/**/*\"",
 		"prettier": "prettier --write .",
 		"prettier:ci": "prettier --check .",
-		"preview": "vite preview",
+		"preview": "vite preview --host 0.0.0.0",
 		"test": "npm run test:unit && npm run test:e2e",
 		"test:unit": "vitest run --config ./tests/unit/vitest.config.ts",
 		"test:e2e": "playwright test --config=tests/e2e/playwright.config.ts"
@@ -20,12 +20,12 @@
 		"d3": "7.9.0",
 		"d3-contour": "4.0.2",
 		"date-fns": "4.1.0",
-		"mapbox-gl": "3.8.0",
+		"mapbox-gl": "3.15.0",
 		"react": "18.3.1",
 		"react-card-flip": "1.2.3",
 		"react-dom": "18.3.1",
 		"react-markdown": "9.0.1",
-		"react-share": "5.1.1",
+		"react-share": "5.2.2",
 		"zustand": "4.5.5"
 	},
 	"devDependencies": {

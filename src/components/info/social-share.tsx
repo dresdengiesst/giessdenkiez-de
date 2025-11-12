@@ -1,12 +1,12 @@
 import React from "react";
 import {
-	FacebookIcon,
-	FacebookShareButton,
-	TwitterShareButton,
-	WhatsappIcon,
-	WhatsappShareButton,
-	XIcon,
-	EmailShareButton,
+    FacebookIcon,
+    FacebookShareButton,
+    WhatsappIcon,
+    WhatsappShareButton,
+    BlueskyShareButton,
+    BlueskyIcon,
+    EmailShareButton,
 } from "react-share";
 import { useI18nStore } from "../../i18n/i18n-store";
 import Markdown from "react-markdown";
@@ -21,27 +21,27 @@ export const SocialShare: React.FC = () => {
 				<div className="flex flex-row justify-center gap-2">
 					<FacebookShareButton
 						aria-label="facebook-sharing-button"
-						url="https://www.giessdenkiez.de/"
+						url="https://www.dresdengiesst.de/"
 					>
 						<FacebookIcon size={36} round />
 					</FacebookShareButton>
-					<TwitterShareButton
+					<BlueskyShareButton
 						aria-label="x-sharing-button"
 						title={i18n.info.share.content}
-						url="https://www.giessdenkiez.de/"
+						url="https://www.dresdengiesst.de"
 					>
-						<XIcon size={36} round />
-					</TwitterShareButton>
+						<BlueskyIcon size={36} round />
+					</BlueskyShareButton>
 					<WhatsappShareButton
 						aria-label="whatsapp-sharing-button"
 						title={i18n.info.share.content}
-						url="https://www.giessdenkiez.de/"
+						url="https://www.dresdengiesst.de"
 					>
 						<WhatsappIcon size={36} round />
 					</WhatsappShareButton>
 					<EmailShareButton
 						aria-label="mail-sharing-button"
-						url="https://www.giessdenkiez.de/"
+						url="https://www.dresdengiesst.de"
 						body={i18n.info.share.content}
 					>
 						<img

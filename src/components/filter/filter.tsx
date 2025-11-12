@@ -11,8 +11,6 @@ export const Filter: React.FC = () => {
 	const { hideFilterView } = useFilterStore();
 
 	const {
-		isPumpsVisible,
-		setShowPumps,
 		areOnlyAllAdoptedTreesVisible,
 		setAreOnlyAllAdoptedTreesVisible,
 		resetFilters,
@@ -32,13 +30,6 @@ export const Filter: React.FC = () => {
 				<div className="flex flex-col gap-2">
 					<div className="font-semibold text-xl">{i18n.filter.title}</div>
 					<div className="flex flex-col gap-2 relative">
-						<FilterSwitch
-							name={i18n.filter.publicPumps}
-							onToggle={() => {
-								setShowPumps(!isPumpsVisible);
-							}}
-							isEnabled={isPumpsVisible}
-						/>
 						<FilterSwitch
 							name={i18n.filter.lastWateredTrees}
 							onToggle={() => {

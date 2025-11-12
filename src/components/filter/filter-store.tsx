@@ -2,7 +2,6 @@ import { create } from "zustand";
 import { replaceUrlSearchParam } from "../../utils/url-utils";
 import { useUrlState } from "../router/store";
 import { useMapConstants } from "../map/hooks/use-map-constants";
-import { usePumpStore } from "../map/hooks/use-pump-store";
 import { useTreeStore } from "../tree-detail/stores/tree-store";
 import { useI18nStore } from "../../i18n/i18n-store.ts";
 export interface TreeAgeRange {
@@ -11,7 +10,6 @@ export interface TreeAgeRange {
 }
 
 export interface FilterState {
-	isPumpsVisible: boolean;
 	areOnlyAllAdoptedTreesVisible: boolean;
 	areLastWateredTreesVisible: boolean;
 	isFilterViewVisible: boolean;
@@ -24,16 +22,15 @@ export interface FilterState {
 	initialTreeAgeRangeMax: number;
 	treeAgeRange: TreeAgeRange;
 	setTreeAgeRange: (min: number, max: number) => void;
-	setShowPumps: (showPumps: boolean) => void;
 	setAreOnlyAllAdoptedTreesVisible: (showOnlyAllAdoptedTrees: boolean) => void;
 	setAreLastWateredTreesVisible: (showLastWateredTrees: boolean) => void;
-	showFilterView: () => void;
-	hideFilterView: () => void;
-	toggleFilterView: () => void;
 	resetFilters: () => void;
 	setLat: (lat: number) => void;
 	setLng: (lng: number) => void;
 	setZoom: (zoom: number) => void;
+	hideFilterView: () => void;
+	showFilterView: () => void;
+	toggleFilterView: () => void;
 	recoverUrlParams: () => void;
 	recoverLanguageParams: () => void;
 }
@@ -105,17 +102,12 @@ export const useFilterStore = create<FilterState>()((set, get) => ({
 		return (
 			get().treeAgeRange.min !== initialTreeAgeRange.min ||
 			get().treeAgeRange.max !== initialTreeAgeRange.max ||
-			get().isPumpsVisible ||
 			get().areLastWateredTreesVisible ||
 			get().areOnlyAllAdoptedTreesVisible
 		);
 	},
 	getAmountOfActiveFilters: () => {
 		let amount = 0;
-
-		if (get().isPumpsVisible) {
-			amount = amount + 1;
-		}
 
 		if (get().areOnlyAllAdoptedTreesVisible) {
 			amount = amount + 1;
@@ -133,16 +125,6 @@ export const useFilterStore = create<FilterState>()((set, get) => ({
 		}
 
 		return amount;
-	},
-	setShowPumps: (showPumps) => {
-		set({ isPumpsVisible: showPumps });
-		const url = new URL(window.location.href);
-		const updatedSearchParams = replaceUrlSearchParam(
-			url,
-			isPumpsVisibleUrlKey,
-			[showPumps ? "true" : "false"],
-		);
-		useUrlState.getState().setSearchParams(updatedSearchParams);
 	},
 
 	setAreOnlyAllAdoptedTreesVisible: (showOnlyAllAdoptedTrees) => {
@@ -189,33 +171,12 @@ export const useFilterStore = create<FilterState>()((set, get) => ({
 		useUrlState.getState().setSearchParams(updatedSearchParamsMax);
 	},
 
-	toggleFilterView: () => {
-		const shouldShow = !get().isFilterViewVisible;
-		set({ isFilterViewVisible: shouldShow });
-		if (shouldShow) {
-			usePumpStore.getState().setHoveredPump(undefined);
-			usePumpStore.getState().setSelectedPump(undefined);
-		}
-	},
-
-	showFilterView: () => {
-		usePumpStore.getState().setHoveredPump(undefined);
-		usePumpStore.getState().setSelectedPump(undefined);
-		set({ isFilterViewVisible: true });
-	},
-
-	hideFilterView: () => {
-		set({ isFilterViewVisible: false });
-	},
-
 	resetFilters: () => {
 		useUrlState.getState().removeSearchParam(treeAgeUrlKeyMin);
-		useUrlState.getState().removeSearchParam(isPumpsVisibleUrlKey);
 		useUrlState.getState().removeSearchParam(areOnlyAllAdoptedTreesVisibleKey);
 		useUrlState.getState().removeSearchParam(areLastWateredTreesVisibleKey);
 		set({
 			treeAgeRange: initialTreeAgeRange,
-			isPumpsVisible: false,
 			areOnlyAllAdoptedTreesVisible: false,
 			areLastWateredTreesVisible: false,
 		});
@@ -236,13 +197,22 @@ export const useFilterStore = create<FilterState>()((set, get) => ({
 		set({ zoom });
 	},
 
+	hideFilterView: () => {
+		set({ isFilterViewVisible: false });
+	},
+
+	showFilterView: () => {
+		set({ isFilterViewVisible: true });
+	},
+
+	toggleFilterView: () => {
+		set((state) => ({ isFilterViewVisible: !state.isFilterViewVisible }));
+	},
+
 	recoverUrlParams: () => {
 		useUrlState.getState().addSearchParam("lat", get().lat.toString());
 		useUrlState.getState().addSearchParam("lng", get().lng.toString());
 		useUrlState.getState().addSearchParam("zoom", get().zoom.toString());
-		useUrlState
-			.getState()
-			.addSearchParam("isPumpsVisible", get().isPumpsVisible.toString());
 		useUrlState
 			.getState()
 			.addSearchParam(

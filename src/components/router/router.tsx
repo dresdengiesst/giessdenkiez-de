@@ -20,6 +20,7 @@ import { Stats } from "../stats/stats";
 export const Router: React.FC = () => {
 	const url = useUrlState((state) => state.url);
 	const setPathname = useUrlState((state) => state.setPathname);
+	const getRelativePath = useUrlState((state) => state.getRelativePath);
 	const treeId = url.searchParams.get("treeId");
 	useLocationEventListener();
 
@@ -29,14 +30,17 @@ export const Router: React.FC = () => {
 		useFilterStore();
 	const { isSplashScreenVisible } = useSplashStore();
 
+	// Use relative path for routing logic
+	const relativePath = getRelativePath();
+
 	useEffect(() => {
-		if (url.pathname === "/map") {
+		if (relativePath === "/map") {
 			recoverUrlParams();
 		}
 		recoverLanguageParams();
-	}, [url.pathname]);
+	}, [relativePath]);
 
-	switch (url.pathname) {
+	switch (relativePath) {
 		case "/":
 			setPathname("/map", { hasSameSearchParams: true, hasSameHash: true });
 			return <></>;

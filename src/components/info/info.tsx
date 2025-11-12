@@ -2,7 +2,6 @@ import React from "react";
 import { useI18nStore } from "../../i18n/i18n-store";
 import { QaEntry } from "./qa-entry";
 import { SocialShare } from "./social-share";
-import { PrimaryButton } from "../buttons/primary";
 import { Credits } from "./credits";
 import { LanguageToggle } from "../router/languageToggle";
 import Markdown from "react-markdown";
@@ -67,16 +66,6 @@ export const Info: React.FC = () => {
 									>
 										{i18n.info.about.head.communityAnswer}
 									</Markdown>
-									<PrimaryButton
-										label={i18n.info.about.head.slackButton}
-										onClick={() => {
-											window.open(
-												"https://join.slack.com/t/giessdenkiez/shared_invite/zt-e3et281u-xON4UmBZpKavzDRkw5HmCQ",
-												"_blank",
-											);
-										}}
-										disabled={false}
-									/>
 									<Markdown
 										// @ts-expect-error typing too complex
 										components={{ a: ExternalAnchorLink }}

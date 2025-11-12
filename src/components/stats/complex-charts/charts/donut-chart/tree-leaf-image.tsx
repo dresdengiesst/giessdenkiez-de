@@ -17,7 +17,7 @@ export const TreeLeafImage: React.FC<TreeLeafImageProps> = ({
 			<image
 				className={"leaf-image"}
 				xlinkHref={`images/leafs/${
-					selectedSpecies.speciesName ?? UNKNOWN_SPECIES_IMAGE_IDENTIFIER
+					selectedSpecies.speciesName?.toUpperCase() ?? UNKNOWN_SPECIES_IMAGE_IDENTIFIER
 				}.png`}
 				x={0}
 				y={0}

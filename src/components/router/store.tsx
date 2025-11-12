@@ -2,6 +2,21 @@ import { create } from "zustand";
 import { trackPageView } from "../matomo/utils/matomo";
 import { URLSearchParams } from "url";
 
+// Get base path from environment or default to empty string
+// VITE_BASE_URL is a full URL (for tests), so we extract just the pathname
+const getBasePath = () => {
+	const viteBaseUrl = import.meta.env.VITE_BASE_URL;
+
+	if (viteBaseUrl) {
+		const url = new URL(viteBaseUrl);
+		return url.pathname;
+	}
+
+	return '';
+};
+
+const BASE_PATH = getBasePath();
+
 interface SetPathnameOptions {
 	hasSameSearchParams?: boolean;
 	hasSameHash?: boolean;
@@ -9,22 +24,30 @@ interface SetPathnameOptions {
 
 interface URLState {
 	url: URL;
+	basePath: string;
 	setPathname: (url: string, options?: SetPathnameOptions) => void;
 	setSearchParams: (searchParams: URLSearchParams) => void;
 	addSearchParam: (key: string, value: string) => void;
 	removeSearchParam: (keyToRemove: string) => void;
+	getRelativePath: () => string;
 }
 
 let debounceTimeoutId: ReturnType<typeof setTimeout>;
 
 export const useUrlState = create<URLState>()((set, get) => ({
 	url: new URL(window.location.href),
+	basePath: BASE_PATH,
 
 	setPathname: (
 		pathname,
 		{ hasSameSearchParams = false, hasSameHash = false } = {},
 	) => {
-		const url = new URL(pathname, get().url.origin);
+		// Ensure pathname starts with base path
+		const fullPathname = pathname.startsWith(get().basePath)
+			? pathname
+			: get().basePath + pathname;
+
+		const url = new URL(fullPathname, get().url.origin);
 
 		if (hasSameSearchParams) {
 			url.search = get().url.search;
@@ -66,5 +89,17 @@ export const useUrlState = create<URLState>()((set, get) => ({
 		url.searchParams.delete(keyToRemove);
 		const updatedSearchParams = url.searchParams;
 		get().setSearchParams(updatedSearchParams);
+	},
+
+	getRelativePath: () => {
+		const { pathname } = get().url;
+		const basePath = get().basePath;
+
+		// Remove base path from pathname to get relative path
+		if (basePath && pathname.startsWith(basePath)) {
+			return pathname.slice(basePath.length) || '/';
+		}
+
+		return pathname;
 	},
 }));

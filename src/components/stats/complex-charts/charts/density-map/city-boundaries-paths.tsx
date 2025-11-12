@@ -2,30 +2,30 @@ import React, { useMemo } from "react";
 import * as d3 from "d3";
 import { FeatureCollection } from "geojson";
 
-interface BerlinDistrictPaths {
-	berlinDistrictsGeoJson: FeatureCollection | null;
+interface CityBoundariesPaths {
+	cityBoundariesGeoJson: FeatureCollection | null;
 	projection: d3.GeoProjection;
 }
 
-export const BerlinDistrictPaths: React.FC<BerlinDistrictPaths> = ({
-	berlinDistrictsGeoJson,
+export const CityBoundariesPaths: React.FC<CityBoundariesPaths> = ({
+    cityBoundariesGeoJson,
 	projection,
 }) => {
-	const berlinDistrictsPaths = useMemo(() => {
-		if (!berlinDistrictsGeoJson) {
+	const cityBoundariesPaths = useMemo(() => {
+		if (!cityBoundariesGeoJson) {
 			return [];
 		}
 
 		const geoGenerator = d3.geoPath().projection(projection);
 
-		return berlinDistrictsGeoJson.features.map(
+		return cityBoundariesGeoJson.features.map(
 			(feature: d3.GeoPermissibleObjects) => geoGenerator(feature),
 		);
-	}, [berlinDistrictsGeoJson, projection]);
+	}, [cityBoundariesGeoJson, projection]);
 
 	return (
 		<>
-			{berlinDistrictsPaths.map((path, i) => (
+			{cityBoundariesPaths.map((path, i) => (
 				<path
 					key={i}
 					className="district"

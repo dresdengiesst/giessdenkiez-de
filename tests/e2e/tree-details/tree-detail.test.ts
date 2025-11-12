@@ -64,7 +64,7 @@ test.describe("Tree detail view", () => {
 		});
 		const hrefAttributeValue = await link.getAttribute("href");
 		expect(hrefAttributeValue).toBe(
-			"https://ordnungsamt.berlin.de/frontend/meldungNeu/wo",
+			"https://buergerbeteiligung.sachsen.de/portal/dresden/beteiligung/themen/1024377",
 		);
 	});
 });

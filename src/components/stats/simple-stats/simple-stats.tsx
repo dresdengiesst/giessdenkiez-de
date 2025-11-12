@@ -9,7 +9,6 @@ export const SimpleStats: React.FC = () => {
 
 	const simpleStats = [
 		{ title: i18n.stats.streetTrees, stat: gdkStats?.numTrees || 0 },
-		{ title: i18n.stats.publicPumps, stat: gdkStats?.numPumps || 0 },
 		{
 			title: i18n.stats.activeUsers,
 			stat: gdkStats?.numActiveUsers || 0,

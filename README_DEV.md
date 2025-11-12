@@ -30,7 +30,7 @@
   - `nvm install && nvm use`
   - `npm ci`
   - `cp .env.example .env`
-  - Load the `.env` file: `direnv allow`
+  - Load the `.env` file: `direnv allow` (https://github.com/direnv/direnv/issues/916)
   - `npx supabase start` which will start a local [Supabase](https://supabase.com/) instance
   - Now the Postgres database (and all other Supabase services) are running locally in Docker containers
   - To see all local Supabase credentials and tokens, use `npx supabase status`
@@ -50,21 +50,28 @@
     - `python3 -m venv venv`
     - `source venv/bin/activate`
   - Install Python dependencies inside the activated virtual environment:
-    - `pip install -r requirements-mac.txt`
+    - `pip install -r requirements-mac.txt` (may fail due to `GDAL` dependency, run next step and try again)
     - Install `GDAL` dependency manually on your system, refer to the README at https://github.com/technologiestiftung/giessdenkiez-de-dwd-harvester
     - 🚨 Attention: This step can be prone to errors, depending on your system. For troubleshooting help, refer to the README at https://github.com/technologiestiftung/giessdenkiez-de-dwd-harvester
+    - in case of "Error: pg_config executable not found."  run `brew install postgresql` (https://www.geeksforgeeks.org/python/how-to-fix-pg_config-executable-not-found-in-python/#for-macos-stepbystep-approach), then `env LDFLAGS='-L/usr/local/lib -L/usr/local/opt/openssl/lib -L/usr/local/opt/readline/lib' pip install psycopg2`
   - Run preparation steps:
     - `cd giessdenkiez-de-dwd-harvester/harvester/prepare`
+    - ?? update path in .env SURROUNDING_SHAPE_FILE (../assets/berlin.shp) and run direnv allow
+    - ?? on error (path?) see https://stackoverflow.com/questions/78949093/how-to-resolve-attributeerror-module-fiona-has-no-attribute-path (use geopandas==0.14.4)
     - `SHAPE_RESTORE_SHX=YES python create-buffer.py`
+    - ?? update path in .env SURROUNDING_SHAPE_FILE (../assets/buffer.shp) and run direnv allow
     - `python create-grid.py`
   - Run the actual script (harvests DWD rain data for last 30 days, generates Mapbox tileset):
     - `cd giessdenkiez-de-dwd-harvester/harvester/`
+    - ?? update path in .env SURROUNDING_SHAPE_FILE (./assets/buffer.shp) and run direnv allow
+    - `brew install tippecanoe`
+    - insert now() in collection_date in radolan_harvester line 1
     - `python src/run_harvester.py` **This may take ~30 minutes or more!**
     - Go to https://studio.mapbox.com/tilesets and verify that the tileset with name `<your_mapbox_layer_name>` is present
 - Run the script for harvesting historical weather data via [BrightSky API](https://brightsky.dev/docs/#/):
   - `python src/run_daily_weather.py` **This may take several minutes!**
   - Verify that the `daily_weather_data` table in your database is populated
-- Create the water pumps GeoJson file:
+- ?? skip ?? Create the water pumps GeoJson file:
   - Change directory to `giessdenkiez-de-osm-pumpen-harvester` repository
   - `python3 -m venv venv`
   - `source venv/bin/activate`
@@ -76,13 +83,14 @@
   - Copy the Supabase URL of the uploaded file for later use as `VITE_MAP_PUMPS_SOURCE_URL` variable
 - Download the Geojson file for Berlin districts:
   - Go to https://github.com/funkeinteraktiv/Berlin-Geodaten/blob/master/berlin_bezirke.geojson and download the GeoJSON manually
+  - Dresden: https://opendata.dresden.de/informationsportal/?open=1&result=064A3A4B48BE41258761DC8D72749104#app/mainpage/
   - Upload the file to your Supabase instance at http://localhost:54323/project/default/storage/buckets/data_assets
   - Copy the URL of the uploaded file for later use as `VITE_BEZIRKE_URL` variable
 - Change directory to `giessdenkiez-de-postgres-api/supabase` to start the Supabase Edge functions
   - `cp .env.sample .env` and change the variables:
     - `PUMPS_URL=<url_to_your_pumps_file>` set value to the URL of your pumps file
   - Run `supabase functions serve --env-file supabase/.env` in `giessdenkiez-de-postgres-api` directory
-- Setup the Frontend:
+- Set up the Frontend:
   - Change directory to `giessdenkiez-de` repository
   - `nvm install && nvm use`
   - `npm ci`
@@ -99,6 +107,9 @@
   - `npm run dev` to reload the App
   - Open `http://localhost:5173/map?treeId=00008100%3A001f2573` in the browser, you should see a map zoomed to a specific tree. 🎉
 
+http://localhost:5173/src/components/map/hooks/use-map-setup.tsx :71
+Error: Source layer "berlin_layer" does not exist on source "trees" as specified by style layer "trees"
+
 ## Step 2: Adapt to your city
 
 ### After executing the following steps, you will have a working version of Gieß den Kiez (for your own city) running locally.
@@ -113,8 +124,8 @@
     - Make sure to follow the schema of the `trees` table, you need the following columns: `id, lat, lng, art_dtsch, gattung_deutsch, pflanzjahr, bezirk, geom`. All other columns are either ignored or populated automatically by some upcoming steps.
     - The `geom` column must be in the format: `SRID=4326;POINT(13.44828414775829 52.44315190724164)`
     - Only proceed after verifying that you have succesfully imported all trees into the database table.
-  - 🚨 **Attention, important manual step:**
-    - In `giessdenkiez-de-postgres-api/supabase/functions/gdk_stats/index.ts`, change the hardcoded values `MOST_FREQUENT_TREE_SPECIES` and `TREE_COUNT` to fit your city trees.
+  ~~- 🚨 **Attention, important manual step:**
+    - In `giessdenkiez-de-postgres-api/supabase/functions/gdk_stats/index.ts`, change the hardcoded values `MOST_FREQUENT_TREE_SPECIES` and `TREE_COUNT` to fit your city trees.~~
 - In the `giessdenkiez-de-dwd-harvester` directory, do the following:
   - 🚨 **Attention, important manual step:** Obtain a [Shapefile](https://desktop.arcgis.com/en/arcmap/latest/manage-data/shapefiles/what-is-a-shapefile.htm) of your city which outlines the geographical city borders.
   - One source for obtaining the shapefile could be the [Geofabrik Portal](https://www.geofabrik.de/de/data/shapefiles.html). The Shapefile `your_city.shp` comes with a project file `your_project.proj`. Save both files in the `giessdenkiez-de-dwd-harvester/harvester/assets` directory.
@@ -133,7 +144,7 @@
     - Run `python src/run_harvester.py` **This may take ~30 minutes or more!**
     - Go to https://studio.mapbox.com/tilesets and verify that the new Mapbox tileset is present
     - Run `python src/run_daily_weather.py` **This may take several minutes!**
-    - Verify that the `hourly_weather_data` table is populated
+    - Verify that the `daily_weather_data` table is populated
 - Back in the `giessdenkiez-de` directory, do the following:
   - Change values in the `.env`:
     - `VITE_MAP_CENTER_LNG=13.388836926491992` change the value to the longitude of the center of your city
