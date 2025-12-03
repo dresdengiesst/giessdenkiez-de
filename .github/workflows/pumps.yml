@@ -2,9 +2,9 @@ name: Update Pumps in Supabase Storage
 
 on:
   workflow_dispatch:
-  repository_dispatch:
+#  repository_dispatch:
     # This action can be triggered via Github API webook (see https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#repository_dispatch)
-    types: [pumps_cron]
+#    types: [pumps_cron]
 
 jobs:
   collect_pumps:
