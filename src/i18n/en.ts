@@ -496,21 +496,21 @@ The district ${district} has provided us with additional information on the indi
 	},
 	loading: {
 		mapLoading:
-			"We are currently loading 967,365 trees from the Berlin tree population.",
+			"We are currently loading 120,015 trees from the Dresden tree population.",
 		treeLoading: "Loading tree information...",
 	},
 	stats: {
-		title: "Berlin Statistics",
-		subtitle: "Gieß den Kiez in numbers",
+		title: "Dresden Statistics",
+		subtitle: "Dresden Giesst in numbers",
 		streetTrees: "City trees",
 		activeUsers: "Active casters",
 		backToFront: "back",
 		wateringsStat: {
 			title: "Waterings",
 			unit: "times",
-			hint: (currentYear) => `were poured in ${currentYear}.`,
+			hint: (currentYear) => `wase poured in ${currentYear}.`,
 			legend: "Number of waterings",
-			backContent: `The watering activity varies in the twelve Berlin districts depending on the level of volunteer involvement. In some areas, engaged residents have already organized themselves into watering groups ([Join the community](https://dresdengiesst.de/vernetzen/)).\n\nIn addition, the needs of the [district’s street and green space offices (SGA)](https://www.berlin.de/ba-friedrichshain-kreuzberg/politik-und-verwaltung/aemter/strassen-und-gruenflaechenamt/) vary. In order to provide the best possible help, you should contact the responsible SGA before the first watering - now you’re ready to join the big community!`,
+			backContent: `The watering activity varies in the districts depending on the level of volunteer involvement. In some areas, engaged residents have already organized themselves into watering groups ([Join the community](https://dresdengiesst.de/vernetzen/)).`,
 		},
 		wateringBehaviorStat: {
 			title: "Pouring behaviour",
@@ -519,7 +519,7 @@ The district ${district} has provided us with additional information on the indi
 			rain: "rain",
 			hint: () => `have already been poured since 2025.`,
 			legend: "∑ Liters poured per month",
-			backContent: `Over impressive 2 million liters have already been poured by volunteers!\n\n“The more the better” does not always apply in the face of increasing water shortages though. And the Berlin watering community knows this, of course, and is therefore mainly active when the trees are actually thirsty: during the vegetative period (April-October) in particularly hot, dry years.\n\nData source: [Weather data (DWD)](https://opendata.dwd.de/)`,
+			backContent: `Over impressive 2 million liters have already been poured by volunteers!\n\n“The more the better” does not always apply in the face of increasing water shortages though. And the Dresden watering community knows this, of course, and is therefore mainly active when the trees are actually thirsty: during the vegetative period (April-October) in particularly hot, dry years.\n\nData source: [Weather data (DWD)](https://opendata.dwd.de/)`,
 		},
 		wateringAmountStat: {
 			title: "Pouring volume",
@@ -535,7 +535,7 @@ The district ${district} has provided us with additional information on the indi
 			hint: () => `exist in Dresden.`,
 			other: "Other",
 			legend: "Share of Dresden’s tree population",
-			backContent: `Dresden is diverse - including the trees!\n\nThis overview shows the twenty most common species, each summarized according to the overarching tree genus.\n\nThe [Dresden Giesst map](https://www.dresdengiesst.de/map) shows the full splendor, and thus nearly 900,000 city trees, with information on species, age and water requirements. Use the filters and search to find out more about the trees in your neighborhood.\n\nData source: [Berlin tree cadastre (Geoportal Berlin)](https://daten.berlin.de/datensaetze/baumbestand-berlin-wms )`,
+			backContent: `Dresden is diverse - including the trees!\n\nThis overview shows the twenty most common species, each summarized according to the overarching tree genus.\n\nThe [Dresden Giesst map](https://www.dresdengiesst.de/map) shows the full splendor, and thus over 120,000 city trees, with information on species, age and water requirements. Use the filters and search to find out more about the trees in your neighborhood.\n\nData source: [Dresdener Baumkataster (Geoportal Dresden)](https://opendata.dresden.de/informationsportal/?open=1&result=8B5B50B7A6E746EB9DEB634A041F596E#app/mainpage/)`,
 		},
 		adoptionStat: {
 			title: "Tree adoptions",
