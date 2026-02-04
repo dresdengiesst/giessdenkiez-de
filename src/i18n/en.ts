@@ -97,7 +97,7 @@ export const en: Content = {
 				register: "Register",
 				confirmEmailTitle: "Confirm account",
 				confirmEmail: (email: string) =>
-					`Check your inbox for ${email} for an email from "no-reply@dresden-giesst.de" with a link to confirm your account.`,
+					`Check your inbox for ${email} for an email from "post@app.dresdengiesst.de" with a link to confirm your account.`,
 				existingAccount: "Already have an account?",
 				logIn: "Log in",
 				passwordShould: "Your password must contain:",
