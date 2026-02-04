@@ -266,7 +266,6 @@ Error: Source layer "berlin_layer" does not exist on source "trees" as specified
   - make sure they are working as expected
   - in case of failures, the rain and watering data of the trees in the Mapbox layer might not be in sync with the database
 - Whenever trees change in your city, make sure to manually update the `trees` table in the database
-  - In case of changes, also update the hardcoded values `MOST_FREQUENT_TREE_SPECIES` and `TREE_COUNT` in `giessdenkiez-de-postgres-api/supabase/functions/gdk_stats/index.ts` to fit your new tree situation
 - Sync your fork with our upstream repositories if you want to follow our latest development updates
 
 ## Troubleshooting
