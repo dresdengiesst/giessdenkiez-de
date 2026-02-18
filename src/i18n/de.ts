@@ -238,7 +238,7 @@ Auch zu empfehlen sind sogenannte Gießsäcke aus denen das Wasser nur sehr lang
 				{
 					question: "Warum werden nicht alle Bäume Dresdens angezeigt?",
 					answer:
-						"Die Dresden Giesst App baut auf dem Baumkataster auf. Das Baumkataster ist ein Verzeichnis der Stadt, in dem (Stadt-/Straßen- oder Park-)Bäume verwaltet werden und das durch das Amt für Stadtgrün und Abfallwirtschaft bereitgestellt wird. Das Amt für Stadtgrün und Abfallwirtschaft ist aber nicht für alle Bäume Dresdens zuständig. Die Bäume im Großen Garten beispielsweise gehören zum Beispiel zur Staatliche Schlösser, Burgen und Gärten Sachsen gGmbH (SBG). Diese Bäume tauchen daher in der App nicht auf.",
+						"Die Dresden Giesst App baut auf dem Baumkataster auf. Das Baumkataster ist ein Verzeichnis der Stadt, in dem (Stadt-/Straßen- oder Park-)Bäume verwaltet werden und das durch das Amt für Stadtgrün und Abfallwirtschaft bereitgestellt wird. Das Amt für Stadtgrün und Abfallwirtschaft ist aber nicht für alle Bäume Dresdens zuständig. Die Bäume im Großen Garten beispielsweise gehören zur Staatliche Schlösser, Burgen und Gärten Sachsen gGmbH (SBG). Diese Bäume tauchen daher in der App nicht auf.",
 				},
 			],
 		},
