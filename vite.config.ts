@@ -4,5 +4,5 @@ import react from "@vitejs/plugin-react";
 // https://vitejs.dev/config/
 export default defineConfig({
 	plugins: [react()],
-	base: "/app/", // Set base path for deployment under /acme context
+	base: "/", // Set base path for deployment under /acme context
 });
