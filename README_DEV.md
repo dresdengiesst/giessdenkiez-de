@@ -84,6 +84,9 @@
 - Download the Geojson file for Berlin districts:
   - Go to https://github.com/funkeinteraktiv/Berlin-Geodaten/blob/master/berlin_bezirke.geojson and download the GeoJSON manually
   - Dresden: https://opendata.dresden.de/informationsportal/?open=1&result=064A3A4B48BE41258761DC8D72749104#app/mainpage/
+  - Note: make sure the district polygons are defined in a clockwise fashion,
+    otherwise the districts aren't shown properly. If this is needed in your
+    case (like it was with the Dresden data), you can use this script: `public/data/change-district-polygon-winding.py`
   - Upload the file to your Supabase instance at http://localhost:54323/project/default/storage/buckets/data_assets
   - Copy the URL of the uploaded file for later use as `VITE_BEZIRKE_URL` variable
 - Change directory to `giessdenkiez-de-postgres-api/supabase` to start the Supabase Edge functions
