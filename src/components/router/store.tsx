@@ -2,14 +2,16 @@ import { create } from "zustand";
 import { trackPageView } from "../matomo/utils/matomo";
 import { URLSearchParams } from "url";
 
-// Get base path from environment or default to empty string
-// VITE_BASE_URL is a full URL (for tests), so we extract just the pathname
+// Get base path from environment or default to empty string. VITE_BASE_URL is a
+// full URL (for tests), so we extract just the pathname. In case of no relative
+// path (e.g. https://app.example.com), we don't want the "/" base path, because
+// it breaks routing, which expects the base path to not end with a "/".
 const getBasePath = () => {
 	const viteBaseUrl = import.meta.env.VITE_BASE_URL;
 
 	if (viteBaseUrl) {
 		const url = new URL(viteBaseUrl);
-		return url.pathname;
+		return url.pathname === '/' ? '' : url.pathname;
 	}
 
 	return '';
