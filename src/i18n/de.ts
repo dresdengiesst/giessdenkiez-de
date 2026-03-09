@@ -24,7 +24,7 @@ export const de: Content = {
 				label: "Impressum",
 			},
 			privacy: {
-				href: "https://www.dresdengiesst.de/datenschutz/",
+				href: "https://www.dresdengiesst.de/datenschutz-app/",
 				label: "Datenschutz",
 			},
 		},
