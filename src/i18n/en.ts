@@ -161,7 +161,7 @@ export const en: Content = {
 				},
 				{
 					question: "Data sources",
-					answer: `The map shows the majority of Dresden's street trees (120,705; as of February 2026). It also shows how much precipitation has fallen on each tree in the last 30 days and whether users have watered them. Unfortunately, for various reasons, not all of Dresden's urban trees are listed yet. However, we are working on improving the data situation. The current data sources are the following:
+					answer: `The map shows the majority of Dresden's street trees (120,766; as of March 2026). It also shows how much precipitation has fallen on each tree in the last 30 days and whether users have watered them. Unfortunately, for various reasons, not all of Dresden's urban trees are listed yet. However, we are working on improving the data situation. The current data sources are the following:
 
 [Geoportal Dresden / Street trees](https://opendata.dresden.de/informationsportal/?open=1&result=8B5B50B7A6E746EB9DEB634A041F596E#app/mainpage/)
 
@@ -496,7 +496,7 @@ The district ${district} has provided us with additional information on the indi
 	},
 	loading: {
 		mapLoading:
-			"We are currently loading 120,015 trees from the Dresden tree population.",
+			"We are currently loading 120,766 trees from the Dresden tree population.",
 		treeLoading: "Loading tree information...",
 	},
 	stats: {
